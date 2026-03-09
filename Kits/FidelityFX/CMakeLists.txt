@@ -30,6 +30,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(FFX_BUILD_VK "Build Vulkan backend" ON)
 option(FFX_BUILD_FRAMEGENERATION "Build frame generation support" ON)
 option(FFX_BUILD_UPSCALER "Build upscaler support" OFF)
+option(FFX_BUILD_FSR4 "Build FSR4 ML upscaler support" OFF)
 
 # Find Vulkan
 if(FFX_BUILD_VK)
@@ -97,12 +98,25 @@ if(FFX_BUILD_VK)
         list(APPEND FFX_UPSCALER_SOURCES ${FFX_UPSCALER_SOURCES_FOUND})
     endif()
 
+    # --- FSR4 ML upscaler sources ---
+    set(FFX_FSR4_SOURCES "")
+    if(FFX_BUILD_FSR4)
+        set(FFX_FSR4_SC_OUTPUT_DIR
+            "${CMAKE_CURRENT_SOURCE_DIR}/upscalers/fsr4/internal/permutations/vk"
+            CACHE PATH "Directory containing generated FSR4 shader permutation headers")
+        list(APPEND FFX_FSR4_SOURCES
+            upscalers/fsr4/vk/ffx_provider_fsr4_vk.cpp
+            upscalers/fsr4/internal/shader_selector.cpp
+        )
+    endif()
+
     # --- Build the VK shared library ---
     add_library(amd_fidelityfx_vk SHARED
         ${FFX_API_SOURCES}
         ${FFX_VK_BACKEND_SOURCES}
         ${FFX_FRAMEGENERATION_SOURCES}
         ${FFX_UPSCALER_SOURCES}
+        ${FFX_FSR4_SOURCES}
     )
 
     target_include_directories(amd_fidelityfx_vk PRIVATE
@@ -119,12 +133,18 @@ if(FFX_BUILD_VK)
         ${Vulkan_INCLUDE_DIRS}
         # Generated shader permutation headers
         ${FFX_SC_OUTPUT_DIR}
+        # FSR4 upscaler includes
+        $<$<BOOL:${FFX_BUILD_FSR4}>:${CMAKE_CURRENT_SOURCE_DIR}/upscalers/fsr4/include>
+        $<$<BOOL:${FFX_BUILD_FSR4}>:${CMAKE_CURRENT_SOURCE_DIR}/upscalers/fsr4/include/gpu>
+        $<$<BOOL:${FFX_BUILD_FSR4}>:${CMAKE_CURRENT_SOURCE_DIR}/upscalers/fsr4/dx12>
+        $<$<BOOL:${FFX_BUILD_FSR4}>:${FFX_FSR4_SC_OUTPUT_DIR}>
     )
 
     target_compile_definitions(amd_fidelityfx_vk PRIVATE
         FFX_BACKEND_VK=1
         $<$<BOOL:${FFX_BUILD_FRAMEGENERATION}>:FFX_FRAMEGENERATION=1>
         $<$<BOOL:${FFX_BUILD_UPSCALER}>:FFX_UPSCALER=1>
+        $<$<BOOL:${FFX_BUILD_FSR4}>:FFX_FSR4=1>
     )
 
     target_link_libraries(amd_fidelityfx_vk PRIVATE

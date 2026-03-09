@@ -115,11 +115,18 @@ extern ffxProvider* ffxGetProviderFsr3FrameGenerationSwapChainVK();
 #include "../../upscalers/fsr3/include/ffx_provider_fsr2.h"
 #endif
 
+#if defined(FFX_FSR4)
+#include "../../upscalers/fsr4/include/ffx_provider_fsr4.h"
+#endif
+
 // Build the provider list. Uses a helper function to avoid static init order issues
 // with global arrays referencing singletons.
 static std::span<ffxProvider* const> GetVKProviders()
 {
     static ffxProvider* providers[] = {
+#if defined(FFX_FSR4)
+        &ffxProvider_FSR4::Instance,
+#endif
 #if defined(FFX_FRAMEGENERATION)
         &ffxProvider_Fsr3FrameGeneration::GetInstance(),
         ffxGetProviderFsr3FrameGenerationSwapChainVK(),
