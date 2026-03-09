@@ -742,7 +742,7 @@ def main():
             # Check if next arg is a value for this flag
             if i + 1 < len(args_list) and not args_list[i + 1].startswith("-"):
                 # Only consume if it looks like a flag value
-                if arg in ("-Fo", "-Fe", "-Fh", "-Fc"):
+                if arg in ("-Fo", "-Fe", "-Fh", "-Fc", "-HV"):
                     i += 1
                     compiler_args.append(args_list[i])
         else:
