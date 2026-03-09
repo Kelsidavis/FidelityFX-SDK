@@ -84,6 +84,7 @@ if(FFX_BUILD_VK)
             framegeneration/fsr3/vk/FrameInterpolationSwapchainVK.cpp
             framegeneration/fsr3/vk/FrameInterpolationSwapchainVK_Helpers.cpp
             framegeneration/fsr3/vk/FrameInterpolationSwapchainVK_UiComposition.cpp
+            framegeneration/fsr3/vk/FrameInterpolationSwapchainVK_DebugPacing.cpp
         )
     endif()
 

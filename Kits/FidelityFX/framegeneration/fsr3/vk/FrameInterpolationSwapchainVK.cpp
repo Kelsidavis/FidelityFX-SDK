@@ -329,6 +329,25 @@ FfxErrorCode FrameInterpolationSwapchainVK::init(VkDevice dev, VkPhysicalDevice 
     if (!createReplacementResources())
         return FFX_ERROR_BACKEND_API_ERROR;
 
+    // Create image views for debug pacing overlay
+    for (uint32_t i = 0; i < swapchainImageCount; i++)
+    {
+        VkImageViewCreateInfo viewInfo{};
+        viewInfo.sType    = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+        viewInfo.image    = swapchainImages[i];
+        viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+        viewInfo.format   = swapchainFormat;
+        viewInfo.subresourceRange.aspectMask     = VK_IMAGE_ASPECT_COLOR_BIT;
+        viewInfo.subresourceRange.baseMipLevel   = 0;
+        viewInfo.subresourceRange.levelCount     = 1;
+        viewInfo.subresourceRange.baseArrayLayer = 0;
+        viewInfo.subresourceRange.layerCount     = 1;
+        vkCreateImageView(device, &viewInfo, nullptr, &swapchainImageViews[i]);
+    }
+
+    // Initialize Anti-Lag 2.0 (optional; silently disabled if unsupported)
+    AMD::AntiLag2VK::Initialize(&antiLagContext, device, physicalDevice);
+
     return FFX_OK;
 }
 
@@ -363,6 +382,25 @@ FfxErrorCode FrameInterpolationSwapchainVK::initNew(VkDevice dev, VkPhysicalDevi
     if (!createReplacementResources())
         return FFX_ERROR_BACKEND_API_ERROR;
 
+    // Create image views for debug pacing overlay
+    for (uint32_t i = 0; i < swapchainImageCount; i++)
+    {
+        VkImageViewCreateInfo viewInfo{};
+        viewInfo.sType    = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+        viewInfo.image    = swapchainImages[i];
+        viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+        viewInfo.format   = swapchainFormat;
+        viewInfo.subresourceRange.aspectMask     = VK_IMAGE_ASPECT_COLOR_BIT;
+        viewInfo.subresourceRange.baseMipLevel   = 0;
+        viewInfo.subresourceRange.levelCount     = 1;
+        viewInfo.subresourceRange.baseArrayLayer = 0;
+        viewInfo.subresourceRange.layerCount     = 1;
+        vkCreateImageView(device, &viewInfo, nullptr, &swapchainImageViews[i]);
+    }
+
+    // Initialize Anti-Lag 2.0 (optional; silently disabled if unsupported)
+    AMD::AntiLag2VK::Initialize(&antiLagContext, device, physicalDevice);
+
     return FFX_OK;
 }
 
@@ -372,6 +410,22 @@ void FrameInterpolationSwapchainVK::shutdown()
 
     if (device != VK_NULL_HANDLE)
         vkDeviceWaitIdle(device);
+
+    // Release Anti-Lag 2.0
+    AMD::AntiLag2VK::DeInitialize(&antiLagContext);
+
+    // Release debug pacing resources
+    ffxDebugPacingReleaseVK(device);
+
+    // Destroy swapchain image views used by debug pacing
+    for (uint32_t i = 0; i < swapchainImageCount; i++)
+    {
+        if (swapchainImageViews[i] != VK_NULL_HANDLE)
+        {
+            vkDestroyImageView(device, swapchainImageViews[i], nullptr);
+            swapchainImageViews[i] = VK_NULL_HANDLE;
+        }
+    }
 
     presentCommandPool.destroy();
     interpolationCommandPool.destroy();
@@ -583,11 +637,31 @@ void FrameInterpolationSwapchainVK::presentPassthrough()
                   swapchainWidth, swapchainHeight);
     }
 
-    // Transition swapchain image to present
-    transitionImageLayout(cmdBuf, swapchainImages[imageIndex],
-                          VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
-                          VK_ACCESS_TRANSFER_WRITE_BIT, VK_ACCESS_MEMORY_READ_BIT,
-                          VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+    // Debug pacing overlay (if enabled)
+    if (drawDebugPacingLines)
+    {
+        transitionImageLayout(cmdBuf, swapchainImages[imageIndex],
+                              VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,
+                              VK_ACCESS_TRANSFER_WRITE_BIT, VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
+                              VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT);
+
+        ffxDebugPacingRenderVK(device, cmdBuf, swapchainImages[imageIndex],
+                               swapchainImageViews[imageIndex], swapchainFormat,
+                               swapchainWidth, swapchainHeight, static_cast<uint32_t>(currentFrameID));
+
+        transitionImageLayout(cmdBuf, swapchainImages[imageIndex],
+                              VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
+                              VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT, VK_ACCESS_MEMORY_READ_BIT,
+                              VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+    }
+    else
+    {
+        // Transition swapchain image to present
+        transitionImageLayout(cmdBuf, swapchainImages[imageIndex],
+                              VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
+                              VK_ACCESS_TRANSFER_WRITE_BIT, VK_ACCESS_MEMORY_READ_BIT,
+                              VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+    }
 
     vkEndCommandBuffer(cmdBuf);
 
@@ -604,6 +678,9 @@ void FrameInterpolationSwapchainVK::presentPassthrough()
     submitInfo.pSignalSemaphores    = &renderFinishedSemaphore;
 
     vkQueueSubmit(presentQueue, 1, &submitInfo, cmdFence);
+
+    // Anti-Lag: mark frame type before present
+    AMD::AntiLag2VK::SetFrameGenFrameType(&antiLagContext, false);
 
     // Present
     VkPresentInfoKHR presentInfo{};
@@ -691,10 +768,30 @@ void FrameInterpolationSwapchainVK::presentInterpolated()
                       swapchainWidth, swapchainHeight);
         }
 
-        transitionImageLayout(cmdBuf, swapchainImages[imageIndex],
-                              VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
-                              VK_ACCESS_TRANSFER_WRITE_BIT, VK_ACCESS_MEMORY_READ_BIT,
-                              VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+        // Debug pacing overlay (if enabled)
+        if (drawDebugPacingLines)
+        {
+            transitionImageLayout(cmdBuf, swapchainImages[imageIndex],
+                                  VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,
+                                  VK_ACCESS_TRANSFER_WRITE_BIT, VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
+                                  VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT);
+
+            ffxDebugPacingRenderVK(device, cmdBuf, swapchainImages[imageIndex],
+                                   swapchainImageViews[imageIndex], swapchainFormat,
+                                   swapchainWidth, swapchainHeight, static_cast<uint32_t>(currentFrameID));
+
+            transitionImageLayout(cmdBuf, swapchainImages[imageIndex],
+                                  VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
+                                  VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT, VK_ACCESS_MEMORY_READ_BIT,
+                                  VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+        }
+        else
+        {
+            transitionImageLayout(cmdBuf, swapchainImages[imageIndex],
+                                  VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
+                                  VK_ACCESS_TRANSFER_WRITE_BIT, VK_ACCESS_MEMORY_READ_BIT,
+                                  VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+        }
 
         vkEndCommandBuffer(cmdBuf);
 
@@ -711,6 +808,9 @@ void FrameInterpolationSwapchainVK::presentInterpolated()
 
         vkQueueSubmit(presentQueue, 1, &submitInfo, cmdFence);
 
+        // Anti-Lag: mark interpolated frame before present
+        AMD::AntiLag2VK::SetFrameGenFrameType(&antiLagContext, true);
+
         VkPresentInfoKHR presentInfo{};
         presentInfo.sType              = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
         presentInfo.waitSemaphoreCount = 1;
@@ -722,6 +822,9 @@ void FrameInterpolationSwapchainVK::presentInterpolated()
         vkQueuePresentKHR(presentQueue, &presentInfo);
         framesSentForPresentation++;
     }
+
+    // Anti-Lag: mark end of frame rendering before presenting the real frame
+    AMD::AntiLag2VK::MarkEndOfFrameRendering(&antiLagContext);
 
     // --- Present the real frame ---
     if (!presentInterpolatedOnly)
@@ -771,10 +874,30 @@ void FrameInterpolationSwapchainVK::presentInterpolated()
                       swapchainWidth, swapchainHeight);
         }
 
-        transitionImageLayout(cmdBuf, swapchainImages[imageIndex],
-                              VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
-                              VK_ACCESS_TRANSFER_WRITE_BIT, VK_ACCESS_MEMORY_READ_BIT,
-                              VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+        // Debug pacing overlay (if enabled)
+        if (drawDebugPacingLines)
+        {
+            transitionImageLayout(cmdBuf, swapchainImages[imageIndex],
+                                  VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,
+                                  VK_ACCESS_TRANSFER_WRITE_BIT, VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
+                                  VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT);
+
+            ffxDebugPacingRenderVK(device, cmdBuf, swapchainImages[imageIndex],
+                                   swapchainImageViews[imageIndex], swapchainFormat,
+                                   swapchainWidth, swapchainHeight, static_cast<uint32_t>(currentFrameID + 1));
+
+            transitionImageLayout(cmdBuf, swapchainImages[imageIndex],
+                                  VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
+                                  VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT, VK_ACCESS_MEMORY_READ_BIT,
+                                  VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+        }
+        else
+        {
+            transitionImageLayout(cmdBuf, swapchainImages[imageIndex],
+                                  VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
+                                  VK_ACCESS_TRANSFER_WRITE_BIT, VK_ACCESS_MEMORY_READ_BIT,
+                                  VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+        }
 
         vkEndCommandBuffer(cmdBuf);
 
@@ -790,6 +913,9 @@ void FrameInterpolationSwapchainVK::presentInterpolated()
         submitInfo.pSignalSemaphores    = &renderFinishedSemaphore;
 
         vkQueueSubmit(presentQueue, 1, &submitInfo, cmdFence);
+
+        // Anti-Lag: mark real frame before present
+        AMD::AntiLag2VK::SetFrameGenFrameType(&antiLagContext, false);
 
         VkPresentInfoKHR presentInfo{};
         presentInfo.sType              = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;

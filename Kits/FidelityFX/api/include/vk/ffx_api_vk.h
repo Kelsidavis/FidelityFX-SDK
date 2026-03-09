@@ -33,6 +33,41 @@ struct ffxCreateBackendVKDesc
     VkPhysicalDevice           vkPhysicalDevice;///< Vulkan physical device.
 };
 
+/// Callback for allocating a VkImage with its backing memory.
+typedef ffxReturnCode_t(*PfnFfxVKImageAllocatorFunc)(uint32_t effectId,
+                                                      const VkImageCreateInfo* pImageCI,
+                                                      const struct FfxApiResourceDescription* pFfxDesc,
+                                                      VkImage* pOutImage,
+                                                      VkDeviceMemory* pOutMemory);
+
+/// Callback for deallocating a VkImage and its backing memory.
+typedef ffxReturnCode_t(*PfnFfxVKImageDeallocatorFunc)(uint32_t effectId,
+                                                        VkImage image,
+                                                        VkDeviceMemory memory);
+
+/// Callback for allocating a VkBuffer with its backing memory.
+typedef ffxReturnCode_t(*PfnFfxVKBufferAllocatorFunc)(uint32_t effectId,
+                                                       const VkBufferCreateInfo* pBufferCI,
+                                                       const struct FfxApiResourceDescription* pFfxDesc,
+                                                       VkBuffer* pOutBuffer,
+                                                       VkDeviceMemory* pOutMemory);
+
+/// Callback for deallocating a VkBuffer and its backing memory.
+typedef ffxReturnCode_t(*PfnFfxVKBufferDeallocatorFunc)(uint32_t effectId,
+                                                         VkBuffer buffer,
+                                                         VkDeviceMemory memory);
+
+#define FFX_API_CREATE_CONTEXT_DESC_TYPE_BACKEND_VK_ALLOCATION_CALLBACKS FFX_API_MAKE_BACKEND_SUB_ID(FFX_API_BACKEND_ID_VK, 0x03)
+struct ffxCreateBackendVKAllocationCallbacksDesc
+{
+    ffxCreateContextDescHeader       header;
+    PfnFfxVKImageAllocatorFunc       pfnImageAllocator;       ///< Image allocation function (can be null)
+    PfnFfxVKImageDeallocatorFunc     pfnImageDeallocator;     ///< Image deallocation function (can be null)
+    PfnFfxVKBufferAllocatorFunc      pfnBufferAllocator;      ///< Buffer allocation function (can be null)
+    PfnFfxVKBufferDeallocatorFunc    pfnBufferDeallocator;    ///< Buffer deallocation function (can be null)
+    FfxApiConstantBufferAllocator    pfnConstantBufferAllocator; ///< Constant buffer allocation function (can be null)
+};
+
 #if defined(__cplusplus)
 
 static inline uint32_t ffxApiGetSurfaceFormatVK(VkFormat format)

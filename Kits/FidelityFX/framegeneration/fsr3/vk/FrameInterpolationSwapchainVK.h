@@ -29,6 +29,8 @@
 #include <condition_variable>
 
 #include "FrameInterpolationSwapchainVK_Helpers.h"
+#include "FrameInterpolationSwapchainVK_DebugPacing.h"
+#include "antilag2/ffx_antilag2_vk.h"
 #include "../../include/ffx_framegeneration.h"
 #include "../../internal/ffx_framegeneration_internal.h"
 #include "../../fsr3/include/ffx_frameinterpolation.h"
@@ -230,6 +232,12 @@ private:
     void*                               presentCallbackContext      = nullptr;
     FfxApiFrameGenerationDispatchFunc   frameGenerationCallback     = nullptr;
     void*                               frameGenerationCallbackContext = nullptr;
+
+    // Anti-Lag 2.0
+    AMD::AntiLag2VK::Context    antiLagContext = {};
+
+    // Debug pacing image views (one per swapchain image)
+    VkImageView                 swapchainImageViews[FFX_FRAME_INTERPOLATION_SWAP_CHAIN_VK_MAX_IMAGE_COUNT] = {};
 
     // VRAM tracking
     uint64_t totalUsageInBytes      = 0;
