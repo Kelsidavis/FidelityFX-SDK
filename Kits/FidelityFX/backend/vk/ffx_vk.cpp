@@ -913,7 +913,7 @@ FfxErrorCode CreatePipelineVK(FfxInterface* backendInterface, FfxShaderBlob* pSh
     pipelineInfo.stage.sType  = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
     pipelineInfo.stage.stage  = VK_SHADER_STAGE_COMPUTE_BIT;
     pipelineInfo.stage.module = effectCtx.shaderModules[pipelineIndex];
-    pipelineInfo.stage.pName  = "main";
+    pipelineInfo.stage.pName  = "CS";
     pipelineInfo.layout       = effectCtx.pipelineLayouts[pipelineIndex];
 
     result = vkCreateComputePipelines(context->device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &effectCtx.computePipelines[pipelineIndex]);
