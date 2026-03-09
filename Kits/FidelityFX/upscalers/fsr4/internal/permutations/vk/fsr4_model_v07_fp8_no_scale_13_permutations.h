@@ -1,0 +1,189 @@
+#include "fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08.h"
+#include "fsr4_model_v07_fp8_no_scale_13_175245721403ceba.h"
+#include "fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b.h"
+#include "fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f.h"
+#include "fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65.h"
+#include "fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32.h"
+#include "fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277.h"
+#include "fsr4_model_v07_fp8_no_scale_13_597c733a651b8566.h"
+#include "fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec.h"
+#include "fsr4_model_v07_fp8_no_scale_13_d180778681183f9d.h"
+#include "fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936.h"
+#include "fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2.h"
+#include "fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2.h"
+#include "fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1.h"
+#include "fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad.h"
+#include "fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5.h"
+#include "fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a.h"
+#include "fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32.h"
+#include "fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd.h"
+#include "fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4.h"
+#include "fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84.h"
+#include "fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295.h"
+#include "fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075.h"
+#include "fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941.h"
+#include "fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f.h"
+#include "fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3.h"
+#include "fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e.h"
+#include "fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e.h"
+#include "fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda.h"
+#include "fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50.h"
+
+typedef union fsr4_model_v07_fp8_no_scale_13_PermutationKey {
+    struct {
+        uint32_t FFX_MLSR_COLORSPACE : 2;
+        uint32_t FFX_MLSR_AUTOEXPOSURE_ENABLED : 1;
+        uint32_t FFX_DEBUG_VISUALIZE : 1;
+        uint32_t FFX_MLSR_RESOLUTION : 2;
+    };
+    uint32_t index;
+} fsr4_model_v07_fp8_no_scale_13_PermutationKey;
+
+typedef struct fsr4_model_v07_fp8_no_scale_13_PermutationInfo {
+    const uint32_t       blobSize;
+    const unsigned char* blobData;
+
+
+    const uint32_t  numConstantBuffers;
+    const char**    constantBufferNames;
+    const uint32_t* constantBufferBindings;
+    const uint32_t* constantBufferCounts;
+    const uint32_t* constantBufferSpaces;
+
+    const uint32_t  numSRVTextures;
+    const char**    srvTextureNames;
+    const uint32_t* srvTextureBindings;
+    const uint32_t* srvTextureCounts;
+    const uint32_t* srvTextureSpaces;
+
+    const uint32_t  numUAVTextures;
+    const char**    uavTextureNames;
+    const uint32_t* uavTextureBindings;
+    const uint32_t* uavTextureCounts;
+    const uint32_t* uavTextureSpaces;
+
+    const uint32_t  numSRVBuffers;
+    const char**    srvBufferNames;
+    const uint32_t* srvBufferBindings;
+    const uint32_t* srvBufferCounts;
+    const uint32_t* srvBufferSpaces;
+
+    const uint32_t  numUAVBuffers;
+    const char**    uavBufferNames;
+    const uint32_t* uavBufferBindings;
+    const uint32_t* uavBufferCounts;
+    const uint32_t* uavBufferSpaces;
+
+    const uint32_t  numSamplers;
+    const char**    samplerNames;
+    const uint32_t* samplerBindings;
+    const uint32_t* samplerCounts;
+    const uint32_t* samplerSpaces;
+
+    const uint32_t  numRTAccelerationStructures;
+    const char**    rtAccelerationStructureNames;
+    const uint32_t* rtAccelerationStructureBindings;
+    const uint32_t* rtAccelerationStructureCounts;
+    const uint32_t* rtAccelerationStructureSpaces;
+} fsr4_model_v07_fp8_no_scale_13_PermutationInfo;
+
+static const uint32_t g_fsr4_model_v07_fp8_no_scale_13_IndirectionTable[] = {
+    0,
+    12,
+    18,
+    24,
+    7,
+    12,
+    18,
+    24,
+    1,
+    13,
+    19,
+    27,
+    9,
+    13,
+    19,
+    27,
+    2,
+    15,
+    21,
+    26,
+    5,
+    15,
+    21,
+    26,
+    4,
+    16,
+    22,
+    28,
+    11,
+    16,
+    22,
+    28,
+    3,
+    14,
+    20,
+    25,
+    8,
+    14,
+    20,
+    25,
+    6,
+    17,
+    23,
+    29,
+    10,
+    17,
+    23,
+    29,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+};
+
+static const fsr4_model_v07_fp8_no_scale_13_PermutationInfo g_fsr4_model_v07_fp8_no_scale_13_PermutationInfo[] = {
+    { g_fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08_size, g_fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08_data, 3, g_fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08_CBVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_90adffc0b655ef08_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_175245721403ceba_size, g_fsr4_model_v07_fp8_no_scale_13_175245721403ceba_data, 3, g_fsr4_model_v07_fp8_no_scale_13_175245721403ceba_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_175245721403ceba_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_175245721403ceba_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_175245721403ceba_CBVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_175245721403ceba_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_175245721403ceba_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_175245721403ceba_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_175245721403ceba_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_175245721403ceba_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_175245721403ceba_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_175245721403ceba_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_175245721403ceba_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b_size, g_fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b_data, 3, g_fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b_CBVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_5fc3271ae232ca5b_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f_size, g_fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f_data, 3, g_fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f_CBVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_e8c3bd4b8b30cb3f_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65_size, g_fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65_data, 3, g_fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65_CBVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_6adf91450f461d65_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32_size, g_fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32_data, 3, g_fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32_CBVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_78e53d74772bdc32_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277_size, g_fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277_data, 3, g_fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277_CBVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_0b789a03874fe277_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_597c733a651b8566_size, g_fsr4_model_v07_fp8_no_scale_13_597c733a651b8566_data, 3, g_fsr4_model_v07_fp8_no_scale_13_597c733a651b8566_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_597c733a651b8566_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_597c733a651b8566_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_597c733a651b8566_CBVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_597c733a651b8566_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_597c733a651b8566_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_597c733a651b8566_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_597c733a651b8566_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_597c733a651b8566_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_597c733a651b8566_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_597c733a651b8566_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_597c733a651b8566_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec_size, g_fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec_data, 3, g_fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec_CBVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_3b801f588da47dec_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_d180778681183f9d_size, g_fsr4_model_v07_fp8_no_scale_13_d180778681183f9d_data, 3, g_fsr4_model_v07_fp8_no_scale_13_d180778681183f9d_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_d180778681183f9d_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_d180778681183f9d_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_d180778681183f9d_CBVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_d180778681183f9d_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_d180778681183f9d_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_d180778681183f9d_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_d180778681183f9d_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_d180778681183f9d_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_d180778681183f9d_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_d180778681183f9d_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_d180778681183f9d_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936_size, g_fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936_data, 3, g_fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936_CBVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_0a79b94c30abb936_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2_size, g_fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2_data, 3, g_fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2_CBVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_9e0f935d3b72eed2_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2_size, g_fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2_data, 3, g_fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_c0dc192cc79d43c2_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1_size, g_fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1_data, 3, g_fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_ce4a81b4468d7ee1_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad_size, g_fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad_data, 3, g_fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_03ac7dda1eb06bad_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5_size, g_fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5_data, 3, g_fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_b22a5d17f4452af5_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a_size, g_fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a_data, 3, g_fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_a23a3ec2125e6e2a_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32_size, g_fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32_data, 3, g_fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_0572a89715ef7f32_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd_size, g_fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd_data, 3, g_fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_cc19557b69788cbd_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4_size, g_fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4_data, 3, g_fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_bf300986cd8c3ec4_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84_size, g_fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84_data, 3, g_fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_01476261b1d7ba84_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295_size, g_fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295_data, 3, g_fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_4b22ad7bca3ed295_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075_size, g_fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075_data, 3, g_fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_16dd5789cc0e5075_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941_size, g_fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941_data, 3, g_fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_d9284dce0feee941_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f_size, g_fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f_data, 3, g_fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_9ae60278e76b5d2f_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3_size, g_fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3_data, 3, g_fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_001f32321a3295e3_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e_size, g_fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e_data, 3, g_fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e_TextureSRVResourceSpaces, 3, g_fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_dd2cd6c9197ee55e_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e_size, g_fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e_data, 3, g_fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_07a2ab41beca928e_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda_size, g_fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda_data, 3, g_fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_62f248e638bd2cda_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50_size, g_fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50_data, 3, g_fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50_CBVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50_CBVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50_CBVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50_CBVResourceSpaces, 2, g_fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50_TextureSRVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50_TextureSRVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50_TextureSRVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50_TextureSRVResourceSpaces, 4, g_fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50_TextureUAVResourceNames, g_fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50_TextureUAVResourceBindings, g_fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50_TextureUAVResourceCounts, g_fsr4_model_v07_fp8_no_scale_13_c7ee8342c21cbd50_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+};
+

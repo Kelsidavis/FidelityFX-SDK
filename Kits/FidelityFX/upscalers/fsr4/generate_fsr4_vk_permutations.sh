@@ -38,20 +38,25 @@ VK_TYPE_ARGS="-DDATA_TYPE=float -DDATA_TYPE3=float3 -DDATA_TYPE_VECTOR=float4"
 # WMMA shim enable
 WMMA_ARGS="-DWMMA_ENABLED=1"
 
+# DXC SPIR-V workarounds
+SPIRV_COMPAT_ARGS="-D_Static_assert(x,y)="
+
 compile_shader() {
     local shader_file="$1"
     local shader_name="$2"
     local entry_point="$3"
-    shift 3
+    local num_threads="${4:-8}"
+    shift 4
     # Remaining args are defines/permutation args
 
-    echo "  Compiling: $shader_name (entry: $entry_point)"
-    python3 "$FFX_SC" $BASE_ARGS "$@" \
+    echo "  Compiling: $shader_name (entry: $entry_point, threads: $num_threads)"
+    python3 "$FFX_SC" $BASE_ARGS -num-threads="$num_threads" "$@" \
         -E "$entry_point" \
         -T cs_6_2 -DFFX_HLSL_SM=62 \
         $INCLUDE_ARGS \
         $VK_TYPE_ARGS \
         $WMMA_ARGS \
+        $SPIRV_COMPAT_ARGS \
         -enable-16bit-types \
         -HV 2021 \
         -name="$shader_name" \
@@ -68,6 +73,7 @@ PRE_PERM_ARGS="-DFFX_MLSR_DEPTH_INVERTED={0,1} -DFFX_MLSR_LOW_RES_MV={0,1} -DFFX
 compile_shader "$SHADER_DIR/pre_wmma.hlsl" \
     "fsr4_model_v07_fp8_no_scale_0" \
     "fsr4_model_v07_fp8_no_scale_prepass" \
+    8 \
     $PRE_PERM_ARGS
 
 # ============================================================================
@@ -80,6 +86,7 @@ POST_PERM_ARGS="-DFFX_MLSR_COLORSPACE={0,1,2,3} -DFFX_MLSR_AUTOEXPOSURE_ENABLED=
 compile_shader "$SHADER_DIR/post_wmma.hlsl" \
     "fsr4_model_v07_fp8_no_scale_13" \
     "fsr4_model_v07_fp8_no_scale_postpass" \
+    4 \
     $POST_PERM_ARGS
 
 # ============================================================================
@@ -94,24 +101,27 @@ for res in "${RESOLUTIONS[@]}"; do
     [ ! -f "$shader_file" ] && echo "  SKIP: passes_${res} (not found)" && continue
 
     for pass in $(seq 1 12); do
-        # Model pass
+        # Model pass (-Od prevents DXC SPIR-V crashes on complex FasterNetBlock shaders)
         compile_shader "$shader_file" \
             "fsr4_model_v07_fp8_no_scale_${res}_${pass}" \
             "fsr4_model_v07_fp8_no_scale_pass${pass}" \
-            "-DMLSR_PASS_${pass}=1"
+            1 \
+            -Od "-DMLSR_PASS_${pass}=1"
 
         # Padding reset (post) variant
         compile_shader "$shader_file" \
             "fsr4_model_v07_fp8_no_scale_${res}_${pass}_post" \
             "fsr4_model_v07_fp8_no_scale_pass${pass}_post" \
-            "-DMLSR_PASS_${pass}_POST=1"
+            1 \
+            -Od "-DMLSR_PASS_${pass}_POST=1"
     done
 
     # Pass 0 post (padding reset for pre-pass output)
     compile_shader "$shader_file" \
         "fsr4_model_v07_fp8_no_scale_${res}_0_post" \
         "fsr4_model_v07_fp8_no_scale_pass0_post" \
-        "-DMLSR_PASS_0_POST=1"
+        1 \
+        -Od "-DMLSR_PASS_0_POST=1"
 done
 
 # ============================================================================
@@ -124,8 +134,9 @@ echo "=== Building FSR4 Utility Shaders ==="
 if [ -f "$SHADER_DIR/rcas.hlsl" ]; then
     RCAS_PERM_ARGS="-DFFX_MLSR_COLORSPACE={0,1,2,3} -DFFX_MLSR_AUTOEXPOSURE_ENABLED={0,1}"
     compile_shader "$SHADER_DIR/rcas.hlsl" \
-        "fsr4_rcas" \
-        "CS" \
+        "rcas" \
+        "main" \
+        8 \
         $RCAS_PERM_ARGS \
         -DFFX_HALF=0
 fi
@@ -133,17 +144,19 @@ fi
 # SPD auto-exposure
 if [ -f "$SHADER_DIR/spd_auto_exposure.hlsl" ]; then
     compile_shader "$SHADER_DIR/spd_auto_exposure.hlsl" \
-        "fsr4_spd_auto_exposure" \
-        "CS" \
+        "spd_auto_exposure" \
+        "main" \
+        1 \
         -DFFX_HALF=0
 fi
 
 # Debug view
 if [ -f "$SHADER_DIR/debug_view.hlsl" ]; then
-    DEBUG_PERM_ARGS="-DFFX_MLSR_COLORSPACE={0,1,2,3} -DFFX_MLSR_AUTOEXPOSURE_ENABLED={0,1}"
+    DEBUG_PERM_ARGS="-DFFX_MLSR_COLORSPACE={0,1,2,3} -DFFX_MLSR_AUTOEXPOSURE_ENABLED={0,1} -DFFX_MLSR_JITTERED_MOTION_VECTORS={0,1}"
     compile_shader "$SHADER_DIR/debug_view.hlsl" \
-        "fsr4_debug_view" \
-        "CS" \
+        "debug_view" \
+        "main" \
+        8 \
         $DEBUG_PERM_ARGS \
         -DFFX_HALF=0
 fi

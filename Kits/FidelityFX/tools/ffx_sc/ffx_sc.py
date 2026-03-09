@@ -352,7 +352,7 @@ def compile_hlsl_to_spirv(
                 env["LD_LIBRARY_PATH"] = lib_dir + ":" + env.get("LD_LIBRARY_PATH", "")
 
         result = subprocess.run(
-            cmd, capture_output=True, text=True, timeout=120, env=env
+            cmd, capture_output=True, text=True, timeout=600, env=env
         )
 
         if result.returncode != 0:
