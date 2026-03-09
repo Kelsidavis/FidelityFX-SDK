@@ -34,21 +34,6 @@
 #include "ffx_vk.h"
 
 // ============================================================================
-// Forward-declare provider singletons (compiled as separate translation units)
-// ============================================================================
-#if defined(FFX_FRAMEGENERATION)
-class ffxProvider_Fsr3FrameGenerationSwapChainVK;
-namespace {
-    ffxProvider& GetFGSwapChainProviderVK();
-}
-#endif
-
-#if defined(FFX_UPSCALER)
-class ffxProvider_FSR3Upscale;
-class ffxProvider_FSR2;
-#endif
-
-// ============================================================================
 // CreateBackend - creates the VK FfxInterface backend
 // ============================================================================
 ffxReturnCode_t CreateBackend(const ffxCreateContextDescHeader *desc, bool& backendFound, FfxInterface *iface, size_t contexts, Allocator& alloc)
@@ -119,12 +104,13 @@ void* GetDevice(const ffxApiHeader* desc)
 #if defined(FFX_FRAMEGENERATION)
 // Defined in ffx_provider_fsr3framegenerationswapchain_vk.cpp
 extern ffxProvider* ffxGetProviderFsr3FrameGenerationSwapChainVK();
+// Defined in ffx_provider_fsr3framegeneration.cpp (backend-agnostic)
+#include "../../framegeneration/fsr3/include/ffx_provider_fsr3framegeneration.h"
 #endif
 
 #if defined(FFX_UPSCALER)
-// Defined in ffx_provider_fsr3upscale.cpp and ffx_provider_fsr2.cpp
-extern ffxProvider* ffxGetProviderFSR3Upscale();
-extern ffxProvider* ffxGetProviderFSR2();
+#include "../../upscalers/fsr3/include/ffx_provider_fsr3upscale.h"
+#include "../../upscalers/fsr3/include/ffx_provider_fsr2.h"
 #endif
 
 // Build the provider list. Uses a helper function to avoid static init order issues
@@ -133,11 +119,12 @@ static std::span<ffxProvider* const> GetVKProviders()
 {
     static ffxProvider* providers[] = {
 #if defined(FFX_FRAMEGENERATION)
+        &ffxProvider_Fsr3FrameGeneration::GetInstance(),
         ffxGetProviderFsr3FrameGenerationSwapChainVK(),
 #endif
 #if defined(FFX_UPSCALER)
-        ffxGetProviderFSR3Upscale(),
-        ffxGetProviderFSR2(),
+        &ffxProvider_FSR3Upscale::GetInstance(),
+        &ffxProvider_FSR2::GetInstance(),
 #endif
     };
     return std::span<ffxProvider* const>(providers);
