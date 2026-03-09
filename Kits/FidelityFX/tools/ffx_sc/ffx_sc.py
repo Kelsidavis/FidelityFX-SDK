@@ -342,11 +342,14 @@ def compile_hlsl_to_spirv(
         cmd.append(input_file)
 
         env = os.environ.copy()
-        # DXC needs to find libdxcompiler.so
+        # DXC needs to find its shared library (libdxcompiler.so/.dylib)
         dxc_dir = os.path.dirname(dxc_path)
         lib_dir = os.path.join(dxc_dir, "..", "lib")
         if os.path.isdir(lib_dir):
-            env["LD_LIBRARY_PATH"] = lib_dir + ":" + env.get("LD_LIBRARY_PATH", "")
+            if sys.platform == "darwin":
+                env["DYLD_LIBRARY_PATH"] = lib_dir + ":" + env.get("DYLD_LIBRARY_PATH", "")
+            else:
+                env["LD_LIBRARY_PATH"] = lib_dir + ":" + env.get("LD_LIBRARY_PATH", "")
 
         result = subprocess.run(
             cmd, capture_output=True, text=True, timeout=120, env=env

@@ -46,7 +46,7 @@ typedef struct ffxFunctions {
 #elif defined(__linux__) || defined(__APPLE__)
 #include <dlfcn.h>
 #else
-#pragma error "Unsupported ffx API platform"
+#error "Unsupported ffx API platform"
 #endif
 
 static inline void ffxLoadFunctions(ffxFunctions* pOutFunctions, void* module)

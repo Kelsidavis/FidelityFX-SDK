@@ -33,6 +33,12 @@ option(FFX_BUILD_UPSCALER "Build upscaler support" OFF)
 
 # Find Vulkan
 if(FFX_BUILD_VK)
+    if(APPLE)
+        # MoltenVK: help CMake find Vulkan via the Vulkan SDK or Homebrew
+        if(DEFINED ENV{VULKAN_SDK})
+            list(APPEND CMAKE_PREFIX_PATH "$ENV{VULKAN_SDK}")
+        endif()
+    endif()
     find_package(Vulkan REQUIRED)
 endif()
 
@@ -137,6 +143,14 @@ if(FFX_BUILD_VK)
         VERSION ${PROJECT_VERSION}
         SOVERSION 2
     )
+
+    if(APPLE)
+        set_target_properties(amd_fidelityfx_vk PROPERTIES
+            INSTALL_RPATH "@loader_path"
+            BUILD_WITH_INSTALL_RPATH ON
+            MACOSX_RPATH ON
+        )
+    endif()
 
     # Install
     install(TARGETS amd_fidelityfx_vk

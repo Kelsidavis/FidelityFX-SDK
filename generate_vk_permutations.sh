@@ -1,5 +1,6 @@
 #!/bin/bash
-# Generate VK SPIR-V shader permutation headers using ffx_sc.py (Linux native)
+# Generate VK SPIR-V shader permutation headers using ffx_sc.py
+# Works on Linux and macOS.
 #
 # Produces the permutation headers that ffx_frameinterpolation_shaderblobs.cpp
 # and ffx_opticalflow_shaderblobs.cpp #include at compile time.
@@ -12,10 +13,26 @@ SHADER_DIR="$SDK_DIR/framegeneration/fsr3/internal/shaders"
 OUTPUT_DIR="$SDK_DIR/framegeneration/fsr3/internal/permutations/vk"
 FFX_SC="$SDK_DIR/tools/ffx_sc/ffx_sc.py"
 
-export DXC="${DXC:-/tmp/dxc/bin/dxc}"
+# Auto-detect DXC: user override > Vulkan SDK > Homebrew > /tmp/dxc > PATH
+if [ -z "$DXC" ]; then
+    if [ -n "$VULKAN_SDK" ] && [ -f "$VULKAN_SDK/bin/dxc" ]; then
+        DXC="$VULKAN_SDK/bin/dxc"
+    elif [ -f "/opt/homebrew/bin/dxc" ]; then
+        DXC="/opt/homebrew/bin/dxc"
+    elif [ -f "/usr/local/bin/dxc" ]; then
+        DXC="/usr/local/bin/dxc"
+    elif [ -f "/tmp/dxc/bin/dxc" ]; then
+        DXC="/tmp/dxc/bin/dxc"
+    else
+        DXC="dxc"
+    fi
+fi
+export DXC
 
-if ! command -v "$DXC" &>/dev/null && [ ! -f "$DXC" ]; then
+if ! command -v "$DXC" >/dev/null 2>&1 && [ ! -f "$DXC" ]; then
     echo "ERROR: DXC not found. Set DXC=/path/to/dxc"
+    echo "  Install via: Vulkan SDK, Homebrew (brew install dxc), or"
+    echo "  download from https://github.com/microsoft/DirectXShaderCompiler/releases"
     exit 1
 fi
 
