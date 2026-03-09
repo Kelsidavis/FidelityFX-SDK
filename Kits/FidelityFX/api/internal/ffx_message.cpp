@@ -21,6 +21,7 @@
 // THE SOFTWARE.
 
 #include "ffx_message.h"
+#include "ffx_util.h"
 
 #if defined(_WINDOWS)
     #ifndef WIN32_LEAN_AND_MEAN

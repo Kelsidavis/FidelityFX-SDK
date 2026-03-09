@@ -30,6 +30,8 @@
 #include "../../../upscalers/fsr3/include/gpu/fsr3/ffx_fsr3_resources.h"
 
 #include <stdlib.h>
+#include <cstring>
+#include <cwchar>
 
 bool ffxProvider_Fsr3FrameGeneration::CanProvide(uint64_t type) const
 {
@@ -79,7 +81,7 @@ struct InternalFgContext
 #define MAKE_VERSION_STRING(major, minor, patch) STRINGIFY major "." STRINGIFY minor "." STRINGIFY patch
 
 ffxProvider_Fsr3FrameGeneration::ffxProvider_Fsr3FrameGeneration() :
-    ffxProvider(0xF600'0000ui64 << 32u | (FFX_SDK_MAKE_VERSION(FFX_FRAMEINTERPOLATION_VERSION_MAJOR, FFX_FRAMEINTERPOLATION_VERSION_MINOR, FFX_FRAMEINTERPOLATION_VERSION_PATCH) & 0xFFFF'FFFF),
+    ffxProvider((uint64_t)0xF6000000ull << 32u | (FFX_SDK_MAKE_VERSION(FFX_FRAMEINTERPOLATION_VERSION_MAJOR, FFX_FRAMEINTERPOLATION_VERSION_MINOR, FFX_FRAMEINTERPOLATION_VERSION_PATCH) & 0xFFFFFFFFu),
         FFX_API_EFFECT_ID_FRAMEGENERATION,
         MAKE_VERSION_STRING(FFX_FRAMEINTERPOLATION_VERSION_MAJOR, FFX_FRAMEINTERPOLATION_VERSION_MINOR, FFX_FRAMEINTERPOLATION_VERSION_PATCH))
 {

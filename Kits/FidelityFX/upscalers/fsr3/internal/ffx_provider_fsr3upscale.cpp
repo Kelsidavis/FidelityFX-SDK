@@ -28,6 +28,7 @@
 #include "../include/gpu/fsr3/ffx_fsr3_resources.h"
 
 #include <stdlib.h>
+#include <cstring>
 
 static uint32_t ConvertFlags(uint32_t apiFlags)
 {
@@ -61,7 +62,7 @@ bool ffxProvider_FSR3Upscale::CanProvide(uint64_t type) const
 #define MAKE_VERSION_STRING(major, minor, patch) STRINGIFY major "." STRINGIFY minor "." STRINGIFY patch
 
 ffxProvider_FSR3Upscale::ffxProvider_FSR3Upscale()
-    : ffxProvider(0xF5A5'CA1Eui64 << 32 | (FFX_SDK_MAKE_VERSION(FFX_FSR3UPSCALER_VERSION_MAJOR, FFX_FSR3UPSCALER_VERSION_MINOR, FFX_FSR3UPSCALER_VERSION_PATCH) & 0xFFFF'FFFF),
+    : ffxProvider((uint64_t)0xF5A5CA1Eull << 32 | (FFX_SDK_MAKE_VERSION(FFX_FSR3UPSCALER_VERSION_MAJOR, FFX_FSR3UPSCALER_VERSION_MINOR, FFX_FSR3UPSCALER_VERSION_PATCH) & 0xFFFFFFFFu),
         FFX_API_EFFECT_ID_UPSCALE,
         MAKE_VERSION_STRING(FFX_FSR3UPSCALER_VERSION_MAJOR, FFX_FSR3UPSCALER_VERSION_MINOR, FFX_FSR3UPSCALER_VERSION_PATCH))
 {

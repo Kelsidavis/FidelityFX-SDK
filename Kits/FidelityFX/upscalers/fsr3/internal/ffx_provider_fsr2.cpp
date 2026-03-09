@@ -26,6 +26,7 @@
 #include "../include/ffx_fsr2.h"
 
 #include <stdlib.h>
+#include <cstring>
 
 static uint32_t ConvertFlags(uint32_t apiFlags)
 {
@@ -59,7 +60,7 @@ bool ffxProvider_FSR2::CanProvide(uint64_t type) const
 #define MAKE_VERSION_STRING(major, minor, patch) STRINGIFY major "." STRINGIFY minor "." STRINGIFY patch
 
 ffxProvider_FSR2::ffxProvider_FSR2()
-    : ffxProvider(0xF5A5'CA1Eui64 << 32 | (FFX_SDK_MAKE_VERSION(FFX_FSR2_VERSION_MAJOR, FFX_FSR2_VERSION_MINOR, FFX_FSR2_VERSION_PATCH) & 0xFFFF'FFFF),
+    : ffxProvider((uint64_t)0xF5A5CA1Eull << 32 | (FFX_SDK_MAKE_VERSION(FFX_FSR2_VERSION_MAJOR, FFX_FSR2_VERSION_MINOR, FFX_FSR2_VERSION_PATCH) & 0xFFFFFFFFu),
         FFX_API_EFFECT_ID_UPSCALE,
         MAKE_VERSION_STRING(FFX_FSR2_VERSION_MAJOR, FFX_FSR2_VERSION_MINOR, FFX_FSR2_VERSION_PATCH))
 {

@@ -23,6 +23,8 @@
 #include "../../api/include/vk/ffx_api_vk.h"
 #include "../../api/internal/ffx_backends.h"
 
+#include <cstring>
+
 #if defined(FFX_FRAMEGENERATION)
 #include "../../framegeneration/include/ffx_framegeneration.h"
 #include "../../framegeneration/include/vk/ffx_api_framegeneration_vk.h"

@@ -20,6 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include "../../../api/internal/ffx_compat.h"
 #include <algorithm>    // for max used inside SPD CPU code.
 #include <cmath>        // for fabs, abs, sinf, sqrt, etc.
 #include <string.h>     // for memset
@@ -602,9 +603,13 @@ static FfxErrorCode fsr3upscalerCreate(FfxFsr3UpscalerContext_Private* context, 
     FFX_RETURN_ON_ERROR(errorCode == FFX_OK, errorCode);
 
 #ifndef _GAMING_XBOX
+#ifdef _MSC_VER
     size_t envVarExists = 0;
     getenv_s(&envVarExists, nullptr, 0, "MLSR-WATERMARK");
     if (envVarExists)
+#else
+    if (getenv("MLSR-WATERMARK"))
+#endif
     {
         context->watermark.emplace(&context->contextDescription.backendInterface, context->effectContextId);
     }

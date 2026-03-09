@@ -1087,18 +1087,12 @@ void FrameInterpolationSwapchainVK::discardOutstandingInterpolationCommandLists(
 }
 
 // ---------------------------------------------------------------------------
-// Free function API implementations (called from ffx_vk.h)
+// Free function API implementations
 // ---------------------------------------------------------------------------
 
-FfxSwapchain ffxGetSwapchainVK(VkSwapchainKHR swapchain)
-{
-    return reinterpret_cast<FfxSwapchain>(swapchain);
-}
-
-VkSwapchainKHR ffxGetVKSwapchain(FfxSwapchain ffxSwapchain)
-{
-    return reinterpret_cast<VkSwapchainKHR>(ffxSwapchain);
-}
+// ffxGetSwapchainVK, ffxGetVKSwapchain, ffxGetDeviceVK, ffxGetCommandListVK,
+// ffxGetResourceVK, ffxGetSurfaceFormatVK, ffxGetVKFormat,
+// ffxGetResourceDescriptionVK are defined in ffx_vk.cpp
 
 FfxErrorCode ffxReplaceSwapchainForFrameinterpolationVK(
     VkDevice device,
@@ -1205,47 +1199,6 @@ FfxErrorCode ffxConfigureFrameInterpolationSwapchainVK(VkSwapchainKHR swapchain,
     return FFX_OK;
 }
 
-// Additional backend functions
-FfxApiSurfaceFormat ffxGetSurfaceFormatVK(VkFormat format)
-{
-    return static_cast<FfxApiSurfaceFormat>(ffxApiGetSurfaceFormatVK(format));
-}
-
-VkFormat ffxGetVKFormat(FfxApiSurfaceFormat surfaceFormat)
-{
-    return ffxGetVKFormatFromSurfaceFormat(surfaceFormat);
-}
-
-FfxApiResourceDescription ffxGetResourceDescriptionVK(VkImage image, VkFormat format, uint32_t width, uint32_t height, FfxApiResourceUsage additionalUsages)
-{
-    FfxApiResourceDescription desc{};
-    desc.type     = FFX_API_RESOURCE_TYPE_TEXTURE2D;
-    desc.format   = ffxApiGetSurfaceFormatVK(format);
-    desc.width    = width;
-    desc.height   = height;
-    desc.depth    = 1;
-    desc.mipCount = 1;
-    desc.flags    = FFX_API_RESOURCE_FLAGS_NONE;
-    desc.usage    = FFX_API_RESOURCE_USAGE_READ_ONLY | additionalUsages;
-    return desc;
-}
-
-FfxDevice ffxGetDeviceVK(VkDevice device)
-{
-    return reinterpret_cast<FfxDevice>(device);
-}
-
-FfxCommandList ffxGetCommandListVK(VkCommandBuffer cmdBuffer)
-{
-    return reinterpret_cast<FfxCommandList>(cmdBuffer);
-}
-
-FfxApiResource ffxGetResourceVK(VkImage image, FfxApiResourceDescription ffxResDescription, const wchar_t* ffxResName, uint32_t state)
-{
-    (void)ffxResName;
-    FfxApiResource res{};
-    res.resource = reinterpret_cast<void*>(image);
-    res.description = ffxResDescription;
-    res.state = state;
-    return res;
-}
+// Additional backend functions (ffxGetSurfaceFormatVK, ffxGetVKFormat,
+// ffxGetResourceDescriptionVK, ffxGetDeviceVK, ffxGetCommandListVK,
+// ffxGetResourceVK) are defined in ffx_vk.cpp

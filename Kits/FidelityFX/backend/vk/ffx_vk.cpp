@@ -27,6 +27,7 @@
 #include "ffx_vk.h"
 
 #include <cstring>
+#include <cwchar>
 #include <mutex>
 #include <limits>
 #include <algorithm>
@@ -485,8 +486,8 @@ FfxErrorCode CreateResourceVK(FfxInterface* backendInterface, const FfxCreateRes
     BackendContext_VK::Resource& res = effectCtx.resources[resourceIndex];
     memset(&res, 0, sizeof(res));
     res.resourceDescription = desc->resourceDescription;
-    res.initialState = desc->initalState;
-    res.currentState = desc->initalState;
+    res.initialState = desc->initialState;
+    res.currentState = desc->initialState;
     res.ownedByBackend = true;
 
     VkFormat format = GetVkFormatFromSurfaceFormat(static_cast<FfxApiSurfaceFormat>(desc->resourceDescription.format));
@@ -766,7 +767,7 @@ FfxErrorCode StageConstantBufferDataVK(FfxInterface* backendInterface, void* dat
     if (context->pStagingRingBuffer)
     {
         memcpy(context->pStagingRingBuffer + context->stagingRingBufferBase, data, size);
-        constantBuffer->data = context->pStagingRingBuffer + context->stagingRingBufferBase;
+        constantBuffer->data = reinterpret_cast<uint32_t*>(context->pStagingRingBuffer + context->stagingRingBufferBase);
         constantBuffer->num32BitEntries = size / sizeof(uint32_t);
         context->stagingRingBufferBase += alignedSize;
     }
@@ -1029,9 +1030,10 @@ FfxErrorCode ScheduleGpuJobVK(FfxInterface* backendInterface, const FfxGpuJobDes
 // ============================================================================
 static void ExecuteClearJobVK(BackendContext_VK* context, FfxGpuJobDescription* job, VkCommandBuffer cmdBuffer, uint32_t effectContextId)
 {
-    (void)context;
+    BackendContext_VK::EffectContext& effectCtx = context->pEffectContexts[effectContextId];
+    BackendContext_VK::Resource& res = effectCtx.resources[job->clearJobDescriptor.target.internalIndex];
 
-    VkImage image = reinterpret_cast<VkImage>(job->clearJobDescriptor.target.resource);
+    VkImage image = res.imageResource;
     if (!image)
         return;
 
@@ -1073,11 +1075,12 @@ static void ExecuteClearJobVK(BackendContext_VK* context, FfxGpuJobDescription* 
 
 static void ExecuteCopyJobVK(BackendContext_VK* context, FfxGpuJobDescription* job, VkCommandBuffer cmdBuffer, uint32_t effectContextId)
 {
-    (void)context;
-    (void)effectContextId;
+    BackendContext_VK::EffectContext& effectCtx = context->pEffectContexts[effectContextId];
+    BackendContext_VK::Resource& srcRes = effectCtx.resources[job->copyJobDescriptor.src.internalIndex];
+    BackendContext_VK::Resource& dstRes = effectCtx.resources[job->copyJobDescriptor.dst.internalIndex];
 
-    VkImage srcImage = reinterpret_cast<VkImage>(job->copyJobDescriptor.src.resource);
-    VkImage dstImage = reinterpret_cast<VkImage>(job->copyJobDescriptor.dst.resource);
+    VkImage srcImage = srcRes.imageResource;
+    VkImage dstImage = dstRes.imageResource;
 
     if (!srcImage || !dstImage)
         return;
@@ -1088,8 +1091,8 @@ static void ExecuteCopyJobVK(BackendContext_VK* context, FfxGpuJobDescription* j
     region.srcSubresource.layerCount = 1;
     region.dstSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
     region.dstSubresource.layerCount = 1;
-    region.extent = {job->copyJobDescriptor.src.description.width,
-                     job->copyJobDescriptor.src.description.height, 1};
+    region.extent = {srcRes.resourceDescription.width,
+                     srcRes.resourceDescription.height, 1};
 
     vkCmdCopyImage(cmdBuffer,
                    srcImage, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,

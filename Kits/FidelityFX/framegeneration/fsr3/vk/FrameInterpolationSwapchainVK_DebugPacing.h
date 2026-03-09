@@ -24,6 +24,7 @@
 
 #include <vulkan/vulkan.h>
 #include "../../../api/internal/ffx_internal_types.h"
+#include "../../../api/internal/ffx_error.h"
 
 /// Initialize the debug pacing overlay resources (pipeline, render pass).
 /// Call once after device creation.  Thread-safe; lazy-initializes on first use.
