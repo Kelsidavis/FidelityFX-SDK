@@ -285,3 +285,9 @@ ffxProvider_Fsr3FrameGenerationSwapChainVK& ffxProvider_Fsr3FrameGenerationSwapC
     static ffxProvider_Fsr3FrameGenerationSwapChainVK instance;
     return instance;
 }
+
+// Accessor for the provider registry in ffx_backends_vk.cpp
+ffxProvider* ffxGetProviderFsr3FrameGenerationSwapChainVK()
+{
+    return &ffxProvider_Fsr3FrameGenerationSwapChainVK::GetInstance();
+}

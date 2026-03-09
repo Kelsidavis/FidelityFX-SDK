@@ -46,11 +46,6 @@ FFX_API_ENTRY ffxReturnCode_t ffxCreateContext(ffxContext* context, ffxCreateCon
 
     *context = nullptr;
 
-    // TODO: Bring in of remaining VK code
-#if defined(FFX_BACKEND_VK)
-    return FFX_API_RETURN_NO_PROVIDER;
-#else
-    
     Allocator alloc{memCb};
     std::optional<ffxProviderExternal> extProviderSlot;
     ffxProvider* provider = GetProvider(desc->type, GetVersionOverride(desc), GetDevice(desc), extProviderSlot);
@@ -71,7 +66,6 @@ FFX_API_ENTRY ffxReturnCode_t ffxCreateContext(ffxContext* context, ffxCreateCon
         alloc.dealloc(provider);
     }
     return retCode;
-#endif // defined(FFX_BACKEND_VK)
 }
 
 FFX_API_ENTRY ffxReturnCode_t ffxDestroyContext(ffxContext* context, const ffxAllocationCallbacks* memCb)
@@ -120,13 +114,10 @@ FFX_API_ENTRY ffxReturnCode_t ffxQuery(ffxContext* context, ffxQueryDescHeader* 
             }
             return FFX_API_RETURN_OK;
         }
-        // TODO: Bring in of remaining VK code
-#if !defined(FFX_BACKEND_VK)
         else if (auto provider = GetProvider(header->type, GetVersionOverride(header), GetDevice(header), extProviderSlot))
         {
             retCode = provider->Query(nullptr, header);
         }
-#endif // !defined(FFX_BACKEND_VK)
         else
         {
             retCode = FFX_API_RETURN_NO_PROVIDER;
