@@ -37,13 +37,14 @@ if(FFX_BUILD_VK)
 endif()
 
 # ---------------------------------------------------------------------------
-# Shader permutation header output directory
-# Run BuildShaders_VK.sh or the .bat scripts to populate this before building.
-# The FidelityFX_SC tool (or DXC with -spirv) generates permutation headers
-# that are #included by the shader blob .cpp files.
+# Shader permutation header directory
+# Pre-generated SPIR-V permutation headers are shipped in-tree.
+# To regenerate, run: ./generate_vk_permutations.sh from the repo root.
+# Override FFX_SC_OUTPUT_DIR to use a custom build output location.
 # ---------------------------------------------------------------------------
-set(FFX_SC_OUTPUT_DIR "${CMAKE_BINARY_DIR}/ffx_sc_output" CACHE PATH
-    "Directory containing generated shader permutation headers")
+set(FFX_SC_OUTPUT_DIR
+    "${CMAKE_CURRENT_SOURCE_DIR}/framegeneration/fsr3/internal/permutations/vk"
+    CACHE PATH "Directory containing generated shader permutation headers")
 
 # ============================================================================
 # VK Backend Library
