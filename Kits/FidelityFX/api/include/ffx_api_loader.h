@@ -43,20 +43,33 @@ typedef struct ffxFunctions {
 #endif // defined(_WINDOWS) || defined(PLATFORM_WINDOWS)
 #if defined(_GAMING_XBOX) || defined(_WINDOWS) || defined(PLATFORM_WINDOWS)
 #include <libloaderapi.h>
+#elif defined(__linux__) || defined(__APPLE__)
+#include <dlfcn.h>
 #else
 #pragma error "Unsupported ffx API platform"
-#endif // #if defined(_GAMING_XBOX) || defined(_WINDOWS) || defined(PLATFORM_WINDOWS)
+#endif
 
 static inline void ffxLoadFunctions(ffxFunctions* pOutFunctions, void* module)
 {
-    // _GAMING_XBOX defined by GDK tools build
-    // _WINDOWS defined by MSBuild x64 windows configurations
-    // PLATFORM_WINDOWS defined for Unreal Engine build processes
 #if defined(_GAMING_XBOX) || defined(_WINDOWS) || defined(PLATFORM_WINDOWS)
     pOutFunctions->CreateContext  = (PfnFfxCreateContext)GetProcAddress((HMODULE)module, "ffxCreateContext");
     pOutFunctions->DestroyContext = (PfnFfxDestroyContext)GetProcAddress((HMODULE)module, "ffxDestroyContext");
     pOutFunctions->Configure      = (PfnFfxConfigure)GetProcAddress((HMODULE)module, "ffxConfigure");
     pOutFunctions->Query          = (PfnFfxQuery)GetProcAddress((HMODULE)module, "ffxQuery");
     pOutFunctions->Dispatch       = (PfnFfxDispatch)GetProcAddress((HMODULE)module, "ffxDispatch");
-#endif // #if defined(_GAMING_XBOX) || defined(_WINDOWS) || defined(PLATFORM_WINDOWS)
+#elif defined(__linux__) || defined(__APPLE__)
+    pOutFunctions->CreateContext  = (PfnFfxCreateContext)dlsym(module, "ffxCreateContext");
+    pOutFunctions->DestroyContext = (PfnFfxDestroyContext)dlsym(module, "ffxDestroyContext");
+    pOutFunctions->Configure      = (PfnFfxConfigure)dlsym(module, "ffxConfigure");
+    pOutFunctions->Query          = (PfnFfxQuery)dlsym(module, "ffxQuery");
+    pOutFunctions->Dispatch       = (PfnFfxDispatch)dlsym(module, "ffxDispatch");
+#endif
 }
+
+#if defined(__linux__) || defined(__APPLE__)
+static inline void* ffxLoadLibrary(const char* path) { return dlopen(path, RTLD_NOW); }
+static inline void  ffxFreeLibrary(void* module)     { dlclose(module); }
+#elif defined(_GAMING_XBOX) || defined(_WINDOWS) || defined(PLATFORM_WINDOWS)
+static inline void* ffxLoadLibrary(const char* path) { return (void*)LoadLibraryA(path); }
+static inline void  ffxFreeLibrary(void* module)     { FreeLibrary((HMODULE)module); }
+#endif
