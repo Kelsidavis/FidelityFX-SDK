@@ -489,7 +489,7 @@ static FfxErrorCode generateReactiveMaskInternal(FfxFsr2Context_Private* context
 
 static void getResourceDescriptions(const FfxApiDimensions2D* maxRenderSize, const FfxApiDimensions2D* displaySize, FfxFsr2ResourceDescriptions* resourceDescriptions)
 {
-    resourceDescriptions->preparedInputColor = { FfxResourceHeapPlacementInfo::InitDefault(), { FFX_API_RESOURCE_TYPE_TEXTURE2D, FFX_API_SURFACE_FORMAT_R16G16B16A16_FLOAT, maxRenderSize->width, maxRenderSize->height, 1, 1, FFX_API_RESOURCE_FLAGS_ALIASABLE, (FFX_API_RESOURCE_USAGE_UAV | FFX_API_RESOURCE_USAGE_DCC_RENDERTARGET) },
+    resourceDescriptions->preparedInputColor = { FfxResourceHeapPlacementInfo::InitDefault(), { FFX_API_RESOURCE_TYPE_TEXTURE2D, FFX_API_SURFACE_FORMAT_R16G16B16A16_UNORM, maxRenderSize->width, maxRenderSize->height, 1, 1, FFX_API_RESOURCE_FLAGS_ALIASABLE, (FFX_API_RESOURCE_USAGE_UAV | FFX_API_RESOURCE_USAGE_DCC_RENDERTARGET) },
         FFX_API_RESOURCE_STATE_UNORDERED_ACCESS, L"FSR2_PreparedInputColor", FFX_FSR2_RESOURCE_IDENTIFIER_PREPARED_INPUT_COLOR, {FFX_RESOURCE_INIT_DATA_TYPE_UNINITIALIZED} };
 
     resourceDescriptions->reconstructedPrevNearestDepth = { FfxResourceHeapPlacementInfo::InitDefault(), { FFX_API_RESOURCE_TYPE_TEXTURE2D, FFX_API_SURFACE_FORMAT_R32_UINT, maxRenderSize->width, maxRenderSize->height, 1, 1, FFX_API_RESOURCE_FLAGS_ALIASABLE, FFX_API_RESOURCE_USAGE_UAV },
@@ -501,7 +501,7 @@ static void getResourceDescriptions(const FfxApiDimensions2D* maxRenderSize, con
     resourceDescriptions->internalDilatedMotionVectors2 = { FfxResourceHeapPlacementInfo::InitDefault(), { FFX_API_RESOURCE_TYPE_TEXTURE2D, FFX_API_SURFACE_FORMAT_R16G16_FLOAT, maxRenderSize->width, maxRenderSize->height, 1, 1, FFX_API_RESOURCE_FLAGS_NONE, (FFX_API_RESOURCE_USAGE_RENDERTARGET | FFX_API_RESOURCE_USAGE_UAV | FFX_API_RESOURCE_USAGE_DCC_RENDERTARGET) },
         FFX_API_RESOURCE_STATE_UNORDERED_ACCESS, L"FSR2_InternalDilatedVelocity2", FFX_FSR2_RESOURCE_IDENTIFIER_INTERNAL_DILATED_MOTION_VECTORS_2, {FFX_RESOURCE_INIT_DATA_TYPE_UNINITIALIZED} };
 
-    resourceDescriptions->dilatedDepth = { FfxResourceHeapPlacementInfo::InitDefault(), { FFX_API_RESOURCE_TYPE_TEXTURE2D, FFX_API_SURFACE_FORMAT_R32_FLOAT, maxRenderSize->width, maxRenderSize->height, 1, 1, FFX_API_RESOURCE_FLAGS_ALIASABLE, (FFX_API_RESOURCE_USAGE_RENDERTARGET | FFX_API_RESOURCE_USAGE_UAV | FFX_API_RESOURCE_USAGE_DCC_RENDERTARGET) },
+    resourceDescriptions->dilatedDepth = { FfxResourceHeapPlacementInfo::InitDefault(), { FFX_API_RESOURCE_TYPE_TEXTURE2D, FFX_API_SURFACE_FORMAT_R16_FLOAT, maxRenderSize->width, maxRenderSize->height, 1, 1, FFX_API_RESOURCE_FLAGS_ALIASABLE, (FFX_API_RESOURCE_USAGE_RENDERTARGET | FFX_API_RESOURCE_USAGE_UAV | FFX_API_RESOURCE_USAGE_DCC_RENDERTARGET) },
         FFX_API_RESOURCE_STATE_UNORDERED_ACCESS, L"FSR2_DilatedDepth", FFX_FSR2_RESOURCE_IDENTIFIER_DILATED_DEPTH, {FFX_RESOURCE_INIT_DATA_TYPE_UNINITIALIZED} };
 
     resourceDescriptions->lockStatus1 = { FfxResourceHeapPlacementInfo::InitDefault(), { FFX_API_RESOURCE_TYPE_TEXTURE2D, FFX_API_SURFACE_FORMAT_R16G16_FLOAT, displaySize->width, displaySize->height, 1, 1, FFX_API_RESOURCE_FLAGS_NONE, (FFX_API_RESOURCE_USAGE_RENDERTARGET | FFX_API_RESOURCE_USAGE_UAV) }, FFX_API_RESOURCE_STATE_UNORDERED_ACCESS, L"FSR2_LockStatus1", FFX_FSR2_RESOURCE_IDENTIFIER_LOCK_STATUS_1, {FFX_RESOURCE_INIT_DATA_TYPE_UNINITIALIZED} };
