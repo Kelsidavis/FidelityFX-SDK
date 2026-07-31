@@ -4,7 +4,7 @@
 
 // -Wno-for-redefinition 
 // -Wno-ambig-lit-shift 
-// -DFFX_OPTICALFLOW_OPTION_HDR_COLOR_INPUT=1
+// -DFFX_OPTICALFLOW_OPTION_HDR_COLOR_INPUT=0
 
 static const char* g_ffx_opticalflow_filter_optical_flow_pass_v5_wave64_a4ae7af7b8a221ef_TextureSRVResourceNames[] = { "r_optical_flow_previous" };
 static const uint32_t g_ffx_opticalflow_filter_optical_flow_pass_v5_wave64_a4ae7af7b8a221ef_TextureSRVResourceBindings[] = {  0 };

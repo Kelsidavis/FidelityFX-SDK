@@ -4,7 +4,7 @@
 
 // -Wno-for-redefinition 
 // -Wno-ambig-lit-shift 
-// -DFFX_OPTICALFLOW_OPTION_HDR_COLOR_INPUT=1
+// -DFFX_OPTICALFLOW_OPTION_HDR_COLOR_INPUT=0
 
 static const char* g_ffx_opticalflow_scale_optical_flow_advanced_pass_v5_57a6d730dab72687_CBVResourceNames[] = { "cbOF" };
 static const uint32_t g_ffx_opticalflow_scale_optical_flow_advanced_pass_v5_57a6d730dab72687_CBVResourceBindings[] = {  0 };

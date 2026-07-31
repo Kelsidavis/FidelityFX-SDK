@@ -1,4 +1,4 @@
-#include "ffx_opticalflow_compute_luminance_pyramid_pass_wave64_11e628800caf27da.h"
+#include "ffx_opticalflow_compute_luminance_pyramid_pass_wave64_a450ac8e0a417e18.h"
 
 typedef union ffx_opticalflow_compute_luminance_pyramid_pass_wave64_PermutationKey {
     struct {
@@ -61,6 +61,6 @@ static const uint32_t g_ffx_opticalflow_compute_luminance_pyramid_pass_wave64_In
 };
 
 static const ffx_opticalflow_compute_luminance_pyramid_pass_wave64_PermutationInfo g_ffx_opticalflow_compute_luminance_pyramid_pass_wave64_PermutationInfo[] = {
-    { g_ffx_opticalflow_compute_luminance_pyramid_pass_wave64_11e628800caf27da_size, g_ffx_opticalflow_compute_luminance_pyramid_pass_wave64_11e628800caf27da_data, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, g_ffx_opticalflow_compute_luminance_pyramid_pass_wave64_11e628800caf27da_TextureUAVResourceNames, g_ffx_opticalflow_compute_luminance_pyramid_pass_wave64_11e628800caf27da_TextureUAVResourceBindings, g_ffx_opticalflow_compute_luminance_pyramid_pass_wave64_11e628800caf27da_TextureUAVResourceCounts, g_ffx_opticalflow_compute_luminance_pyramid_pass_wave64_11e628800caf27da_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+    { g_ffx_opticalflow_compute_luminance_pyramid_pass_wave64_a450ac8e0a417e18_size, g_ffx_opticalflow_compute_luminance_pyramid_pass_wave64_a450ac8e0a417e18_data, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, g_ffx_opticalflow_compute_luminance_pyramid_pass_wave64_a450ac8e0a417e18_TextureUAVResourceNames, g_ffx_opticalflow_compute_luminance_pyramid_pass_wave64_a450ac8e0a417e18_TextureUAVResourceBindings, g_ffx_opticalflow_compute_luminance_pyramid_pass_wave64_a450ac8e0a417e18_TextureUAVResourceCounts, g_ffx_opticalflow_compute_luminance_pyramid_pass_wave64_a450ac8e0a417e18_TextureUAVResourceSpaces, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
 };
 
